@@ -16,15 +16,22 @@ import (
 // ประกาศฟังก์ชันชื่อ familyName() มีพารามิเตอร์ 2 ตัว ชื่อ fname ชนิดข้อมูล string
 // และชื่อ age ชนิดข้อมูล int
 func familyName(fname string, age int) {
+	//ประกาศฟังก์ชัน Println() กำหนดข้อความ "Hi" "year" "Refsnes"
 	f.Println("Hi", age, "year", fname, "Refsnes") //พิมพ์ข้อความออกจอภาพ
+	// ผลลัพธ์ Hi 3 year Liam Refsnes
+	// ผลลัพธ์ Hi 14 year jenny Refsnes
+	// ผลลัพธ์ Hi 30 year Anja Refsnes
 }
 func main() {
-	//เรียกใช้งานฟังก์ชัน familyName() ด้วยชื่อ Liam และอายุ 3
-	//เรียกใช้งานฟังก์ชัน familyName() ด้วยชื่อ jenny และอายุ 14
-	//เรียกใช้งานฟังก์ชัน familyName() ด้วยชื่อ Anja และอายุ 30
-	familyName("Liam", 3)   // ผลลัพธ์ Hi 3 year Liam Refsnes
-	familyName("jenny", 14) // ผลลัพธ์ Hi 14 year jenny Refsnes
-	familyName("Anja", 30)  // ผลลัพธ์ Hi 30 year Anja Refsnes
+
+	//เรียกใช้งานฟังก์ชัน familyName() กำหนดค่าอากิวเมนต์ชื่อ "Liam" และเป็นตัวเลข 3 ส่งค่าออกไปฟังก์ชัน Println()
+	familyName("Liam", 3)
+
+	//เรียกใช้งานฟังก์ชัน familyName() กำหนดค่าอากิวเมนต์ชื่อ "Jenny" และเป็นตัวเลข 14 ส่งค่าออกไปฟังก์ชัน Println()
+	familyName("jenny", 14)
+
+	//เรียกใช้งานฟังก์ชัน familyName() กำหนดค่าอากิวเมนต์ชื่อ "Anja" และเป็นตัวเลข 30 ส่งค่าออกไปฟังก์ชัน Println()
+	familyName("Anja", 30)
 }
 
 /*อธิบายโค้ด
