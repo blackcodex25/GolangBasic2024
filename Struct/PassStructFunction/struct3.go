@@ -43,7 +43,7 @@ func main() {
 	// เรียกใช้ฟังก์ชัน printPerson เพื่อพิมพ์ข้อมูลของ pers1
 	printPerson(pers1) // ส่งค่า pers1 เป็นพารามิเตอร์ให้กับฟังก์ชัน printPerson
 
-	// เรียกใช้ฟังก์ชัน printPerson เมื่อพิมข้อมูลของ pers2
+	// เรียกใช้ฟังก์ชัน printPerson เมื่อพิมพ์ข้อมูลของ pers2
 	printPerson(pers2) // ส่งค่า pers2 เป็นพารามิเตอร์ให้กับฟังก์ชัน printPerson
 
 }
