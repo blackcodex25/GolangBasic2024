@@ -1,0 +1,47 @@
+ประเภทคีย์ที่อนุญาติ (Allowed Key Types)
+ในภาษา Go คีย์ของ map สามารถเป็นชนิดข้อมูลใดก็ได้ที่
+สามารถใช้งานตัวดำเนินการเท่ากับ (==) ได้ซึ่งรวมถึง
+    1.Booleans: ตัวแปรที่มีค่าจริง (true) หรือเท็จ (false)
+    2.Numbers: ชนิดตัวเลขเช่น int, float,และอื่นๆ
+    3.String: สตริง
+    4.Arrays: อาร์เรย์
+    5.Pointers: ตัวชี้
+    6.Struct: โครงสร้าง
+    7.Interfaces: ตราบใดที่ชนิดไดนามิกสามารถใช้งานตัวดำเนินการเท่ากับ (==)
+
+ประเภทค่าที่อนุญาติ
+ค่าของ map สามารถเป็นประเภทใดก็ได้
+
+ประเภทคีย์ที่ไม่ถูกต้อง
+ชนิดข้อมูลที่ไม่สามารถเป็นคีย์ของ map ได้ 
+1. Slice
+2. Maps
+3. Functions
+ตัวอย่างคีย์ที่ไม่ถูกต้อง
+// ใช้ slice เป็นคีย์ (ไม่ถูกต้อง)
+	/*
+		sliceKey := []int{1, 2, 3}
+		sliceMap := map[[]int]string{sliceKey: "value"}
+		fmt.Println(sliceMap)
+	*/
+
+	// ใช้ map เป็นคีย์ (ไม่ถูกต้อง)
+	/*
+		innerMap := map[string]int{"a": 1}
+		mapMap := map[map[string]int]string{innerMap: "value"}
+		fmt.Println(mapMap)
+	*/
+
+	// ใช้ function เป็นคีย์ (ไม่ถูกต้อง)
+	/*
+		funcKey := func() {}
+		funcMap := map[func()]string{funcKey: "value"}
+		fmt.Println(funcMap)
+	*/
+
+สรุป
+คีย์ของแผนที่ใน Go สามารถเป็นชนิดข้อมูลใดก็ได้ที่
+สามารถใช้ตัวดำเนินการเท่ากับ (==) ได้ 
+เช่น booleans, numbers, strings, arrays, pointers, structs และ interfaces 
+แต่ชนิดข้อมูลเช่น slices, maps และ functions ไม่สามารถเป็นคีย์ได้เนื่องจาก
+ไม่สามารถใช้ตัวดำเนินการเท่ากับ (==) ได้
