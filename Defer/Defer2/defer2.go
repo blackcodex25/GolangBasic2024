@@ -10,7 +10,7 @@ import (
 การปิดไฟล์หรือการปล่อยล็อก (unlocking locks) ตัวอย่างเช่น
 */
 func main() {
-	file, err := os.Open("./Defer/Defer.txt")
+	file, err := os.Open("./Defer/Defer.txt") // ตรวจสอบว่าไฟล์นี้มีอยู่ในไดเรกทอรี่ปัจจุบัน
 	if err != nil {
 		f.Println("Error opening file:", err)
 		return
