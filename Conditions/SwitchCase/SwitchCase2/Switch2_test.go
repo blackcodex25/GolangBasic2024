@@ -5,15 +5,21 @@ import (
 	"time"
 )
 
+// นำเข้าแพ็กเกจ testing สำหรับการเขียนทดสอบ และแพ็กเกจ time สำหรับจัดการวันและเวลา
 // ฟังก์ชันทดสอบวันและสัปดาห์ CheckDayofWeek
-
+/* ฟังก์ชันนี้เป็นฟังก์ชันทดสอบชื่อ TestCheckDayOfWeek ซึ่งรับพารามิเตอร์ t เป็น
+ตัวทดสอบจากแพ็กเกจ testing
+*/
 func TestCheckDayOfWeek(t *testing.T) {
 	// วันที่กำหนดขึ้นเองเพื่อทดสอบ
-	today := []struct {
+	today := []struct { // ประกาศตัวแปร today เป็น slice ของ struct ที่มีฟิลด์ name, input, และ expected
 		name     string
 		input    time.Time
 		expected time.Weekday
 	}{
+		// เรียกใช้งานตัวแปร name ชนิดข้อมูล string
+		// เรียกใช้งานตัวแปร input ชนิดข้อมูลแสดงเวลา time.Time
+		// เรียกใช้งานตัวแปร expected ชนิดข้อมูลตรวจสอบชื่อภาษาอังกฤษของวัน time.Weekday
 		{name: "ทดสอบวันพุธ",
 			input:    time.Date(2024, 7, 24, 0, 0, 0, 0, time.UTC), // 24 กรกฏาคม 2024 เป็นวันพุธ
 			expected: time.Wednesday,
@@ -21,26 +27,46 @@ func TestCheckDayOfWeek(t *testing.T) {
 		{
 			name:     "ทดสอบวันพฤหัสบดี ",
 			input:    time.Date(2024, 7, 25, 0, 0, 0, 0, time.UTC), // 25 กรกฏาคม 2024 เป็นวันพฤหัสบดี
-			expected: time.thursday,
+			expected: time.Thursday,
 		},
 		{
 			name:     "ทดสอบวันศุกร์",
-			input:    time.Date(2024, 7, 26, 0, 0, 0, 0, Time.UTC),
-			expected: time.friday,
+			input:    time.Date(2024, 7, 26, 0, 0, 0, 0, time.UTC), // 26 กรกฏาคม 2024 เป็นวันศุกร์
+			expected: time.Friday,
 		},
 	}
-	for _, tt := range today {
-		t.Run(tt.name, func(t *testing.T) {
+	for _, tt := range today { // วนลูปผ่านแต่ละรายการใน slice ชื่อตัวแปร today
+		t.Run(tt.name, func(t *testing.T) { // เรียกใช้ฟังก์ชันทดสอบย่อยสำหรับแต่ละรายการทดสอบ
 			// เรียกฟังก์ชันที่ทดสอบ
-			actual := TestCheckDayOfWeek(tt.input)
-			if actual != tt.expected {
-				t.Errorf("expected %v, got %v", tt.expected, actual)
+			actual := CheckDayofWeek(tt.input) // เรียกใช้ฟังก์ชัน CheckDayOfWeek ที่จะทดสอบโดยส่งค่าพารามิเตอร์เป็นตัวแปร tt.input
+			if actual != tt.expected {         // ตรวจสอบค่าที่ได้รับตัวแปร actual ว่าตรงกับค่าที่คาดหวังตัวแปร (tt.expected) หรือไม่
+				t.Errorf("expected %v, got %v", tt.expected, actual) // ถ้าไม่ตรงกัน ให้รายงานข้อผิดพลาดพร้อมกับค่าที่คาดหวังและค่าที่ได้รับ
 			}
 		})
 	}
 }
 
 // ฟังก์ชันที่เราจะทดสอบ
+// ประกาศฟังก์ชันชื่อ CheckDayOfWeek รับพารามิเตอร์ t ซึ่งมีชนิดข้อมูลเป็น time.Time และคืนค่าประเภท time.Weekday
 func CheckDayofWeek(t time.Time) time.Weekday {
-	return t.Weekday()
-}
+	return t.Weekday() // ประกาศฟังก์ชัน return คืนค่าวันในสัปดาห์ให้กับตัวแปร t.Weekday
+} /*Note:
+time.Time เป็นโครงสร้างข้อมูลที่ใช้ในการจัดการวันและเวลาในภาษา Go
+time.Weekday เป็นชนิดข้อมูลที่แทนวันในสัปดาห์ เช่น วันอาทิตย์ (time.Sunday), วันจันทร์ (time.Monday) เป็นต้น
+t.Weekday จะคืนค่าวันในสัปดาห์ของวันที่ที่เก็บในตัวแปร t ซึ่งเป็นชนิดข้อมูล time.Weekday
+t: ชื่อพารามิเตอร์ที่ใช้ในฟังก์ชัน
+(t time.Time) พารามิเตอร์ที่ฟังก์ชันนี้รับเข้า โดยมีชื่อว่าพารามิเตอร์ t และมีประเภทข้อมูลเป็น time.Time
+*/
+/* หลักการทำงานของโปรแกรมทดสอบ
+1.โปรแกรมทดสอบจะสร้างวันที่ต่างๆ ในฟิลด์ input ของฟังก์ชัน slice ชื่อตัวแปร today
+พร้อมทั้งกำหนดค่าที่คาดหวังตัวแปร expected ว่าจะได้วันอะไรจากฟังก์ชัน CheckDayofWeek
+2.โปรแกรมจะเรียกใช้ฟังก์ชัน CheckDayofWeek ในการทดสอบแต่ละรายการในฟังก์ชัน slice ชื่อตัวแปร today
+โดยส่งค่า input เข้าไปในฟังก์ชันและเปรียบเทียบผลลัพธ์ที่ได้กับค่าที่คาดหวังตัวแปร expected
+3.ถ้าผลลัพธ์ได้ไม่ตรงกับค่าที่คาดหวัง
+โปรแกรมจะรายงานข้อผิดพลาดออกมาเพื่อให้ทราบว่าเกิดความผิดพลาดในการทดสอบ
+*/
+/* สรุป
+โปรแกรมทดสอบวันนี้ใช้สำหรับตรวจสอบการทำงานของฟังก์ชัน CheckDayOfWeek ว่าสามารถคืนค่าวันในสัปดาห์ได้
+ถูกต้องตามที่คาดหวังหรือไม่ โดยใช้โครงสร้างของข้อมูลที่ประกอบด้วยค่าทดสอบตัวแปร input และค่าที่คาดหวังตัวแปร expected
+แล้วเปรียบเทียบผลลัพธ์ที่ได้กับค่าที่คาดหวังเพื่อรายงานข้อผิดพลาดที่เกิดขึ้น
+*/
