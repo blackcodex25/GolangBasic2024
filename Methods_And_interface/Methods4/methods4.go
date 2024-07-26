@@ -44,7 +44,7 @@ func main() {
 
 	var a Abser = v    // ใช้ interface รับค่าของ Vertex
 	f.Println(a.Abs()) // เรียก method Abs ผ่าน interface
-	Describe(v)        // ใช้ interface ในฟังก์ชัน Describe
+	//Describe(v)        // ใช้ interface ในฟังก์ชัน Describe
 
 	/* var ตัวแปร a = v คือการใช้ interface ชื่อตัวแปร Abser รับ
 	instance ของ Vertex
