@@ -28,13 +28,18 @@ func ScaleFunc(v *Vertex, f float64) {
 	v.Y = v.Y * f
 }
 func main() {
-	v := Vertex{3, 4}
+	v := Vertex{3, 4} // ประกาศตัวแปร v ชนิดเป็น Vertex กำหนดค่าอากิวเมนต์ 3 และ 4
 	v.Scale(2)        // เรียกใช้เมธอด Scale ที่มี pointer receiver
 	ScaleFunc(&v, 10) // เรียกใช้ฟังก์ชัน ScaleFunc โดยส่ง pointer
 
-	p := &Vertex{4, 3}
-	v.Scale(3)      // เรียกใช้เมธอด Scale โดย pointer
-	ScaleFunc(p, 8) // เรียกใช้ฟังก์ชัน ScaleFunc โดย pointer
+	p := &Vertex{4, 3} // ประกาศตัวแปร p ที่ชี้ไปยัง Vertex กำหนดค่าอากิวเมนต์ 4 และ 3
+	v.Scale(3)         // เรียกใช้เมธอด Scale โดย pointer
+	ScaleFunc(p, 8)    // เรียกใช้ฟังก์ชัน ScaleFunc โดย pointer
 
 	f.Println(v, p) // พิมพ์ผลลัพธ์ของ v และ p ออกจอภาพ
 }
+
+/* Note: ใช้เครื่องหมาย & เพื่อให้ได้ pointer ที่ชี้ไปยังค่าของ Vertex นี้
+การใช้ Pointer กับ struct, slice, map: การเข้าถึงและแก้ไข
+ข้อมูลใน struct, slice และ map ผ่าน Pointer
+*/
