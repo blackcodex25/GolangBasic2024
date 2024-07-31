@@ -17,5 +17,5 @@ func Fizzy(foo Foo) {
 }
 func main() {
 	b := Bar{}
-	Fizzy(b) // เกิดข้อผิดพลาด บรรทัดที่ 20
+	Fizzy(b) // พบข้อผิดพลาด บรรทัดที่ 20
 }
