@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// โค้ดนี้ประกาศ
 type IPAddr [4]byte
 
 func (ip IPAddr) String() string {
