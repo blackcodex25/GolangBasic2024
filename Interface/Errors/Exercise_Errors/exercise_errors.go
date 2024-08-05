@@ -24,6 +24,9 @@ func (e ErrNegativeSqrt) Error() string {
 // ประกาศฟังก์ชัน Sqrt() กำหนดพารามิเตอร์ x ชนิด float64
 // ประกาศคืนค่าสองชนิด float64 และ error
 func Sqrt(x float64) (float64, error) {
+	/* ฟังก์ชัน Sqrt ยังคงคืนค่า 0 และ nil ซึ่งหมายถึง
+	ไม่มีข้อผิดพลาดเกิดขึ้น (ยังไม่ได้คำนวณจริง)
+	*/
 	// คืนค่าจำนวนจริง float64 สำหรับค่าที่ยังไม่ได้คำนวณ 0 และ nil คืนค่า error
 	return 0, nil
 }
