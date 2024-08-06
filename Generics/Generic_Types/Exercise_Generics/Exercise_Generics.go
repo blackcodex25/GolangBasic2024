@@ -48,6 +48,7 @@ func (list *LinkedList) Print() {
 	}
 	f.Println()
 }
+
 func (list *LinkedList) Find(value int) bool {
 	current := list.head
 	for current != nil {
@@ -58,6 +59,7 @@ func (list *LinkedList) Find(value int) bool {
 	}
 	return false
 }
+
 func (list *LinkedList) Delete(value int) bool {
 	if list.head == nil {
 		return false
@@ -76,6 +78,7 @@ func (list *LinkedList) Delete(value int) bool {
 	}
 	return false
 }
+
 func main() {
 	// สร้างลิงก์ลิสต์ใหม่
 	intlist := LinkedList{}
