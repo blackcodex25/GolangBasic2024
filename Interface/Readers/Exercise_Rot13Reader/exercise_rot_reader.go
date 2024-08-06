@@ -24,29 +24,53 @@ type rot13Reader struct {
 	r io.Reader
 }
 
+/*
+	เมธอด Read รับพารามิเตอร์ b เป็นสไลซ์ของไบต์ ([]byte)
+
+และคืนค่าจำนวนไบต์ที่อ่านได้และข้อผิดพลาดถ้ามี
+*/
 func (r rot13Reader) Read(b []byte) (int, error) {
+	// อ่านข้อมูลจาก r.r ลงในบัฟเฟอร์ b
 	n, err := r.r.Read(b)
+	// วนลูปผ่านแต่ละไบต์ในบัฟเฟอร์ b และทำการแปลงอักขระตามการเข้ารหัส ROT13
+	// โดยใช้ switch
 	for i := 0; i < n; i++ {
 		rot13 := b[i]
 		switch {
+		// ถ้าเป็นอักษรตัวใหญ่ (A - Z):
 		case rot13 >= 'A' && rot13 <= 'Z':
+			// เลื่อนตำแหน่งอักษร 13 ตำแหน่งภายในช่วง A - Z
 			b[i] = 'A' + (rot13-'A'+13)%26
+		// ถ้าเป็นตัวอักษรตัเล็ก (a - z):
 		case rot13 >= 'a' && rot13 <= 'z':
+			// เลื่อนตำแหน่งอักษร 13 ตำแหน่งภายในช่วง a - z
 			b[i] = 'a' + (rot13-'a'+13)%26
 		}
 	}
+	// คืนค่าจำนวนไบต์ที่อ่านได้ n และข้อผิดพลาด err
 	return n, err
 }
 func main() {
+	// สร้าง strings.NewReader จากข้อความ "LBH penpxrq gur pbqr!"
 	s := strings.NewReader("LBH penpxrq gur pbqr!")
+	// สร้าง rot13Reader ที่ห่อหุ้ม strings.NewReader
 	r := rot13Reader{s}
+	// ใช้ io.Copy เพื่ออ่านข้อมูลจาก rot13Reader และเขียนออกไปยัง os.Stdout
 	io.Copy(os.Stdout, &r)
 
 }
 
-/*
-buf := make([]byte, 8)
-	if _, err := io.CopyBuffer(os.Stdout, s, buf); err != nil{
-		log.Fatal(err)
-	}
+/* การทำงานของโปรแกรม
+1.การอ่านข้อมูลด้วย rot13Reader
+อ่านข้อมูลจาก strings.NewReader และเก็บไว้ในบัฟเฟอร์ b
+วนลูปผ่านบัฟเฟอร์ b และทำการเลื่อนตำแหน่งตัวอักษรตามวิธี ROT13
+2.การพิมพ์ผลลัพธ์
+ข้อมูลที่ถูกแปลงด้วยวิธี ROT13 จะถูกพิมพ์ออกทางจอภาพ
+*/
+/*  สรุป
+โค้ดนี้สร้าง rot13Reader ที่ทำการเข้ารหัสและถอดรหัสข้อความด้วยวิธี ROT13 โดยการ
+เลื่อนตัวอักษรไป 13 ตำแหน่ง และใช้ io.Copy เพื่ออ่านข้อมูลจาก rot13Reader และ
+พิมพ์ผลลัพธ์ที่ถูกถอดรหัสออกทางจอ ข้อความต้นฉบับคือ "LBH penpxrq gur pbqr!"
+ซึ่งถูกเข้ารหัสด้วย ROT13 และเมื่อถูกถอดรหัสด้วย rot13Reader จะได้ข้อความ
+"YOU cracked the code!"
 */
