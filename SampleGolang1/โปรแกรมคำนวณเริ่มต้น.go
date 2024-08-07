@@ -5,9 +5,12 @@ import (
 )
 
 // เรียกใช้งาน keyword var ประกาศตัวแปรพร้อมระบุชนิดข้อมูล
-var num1, num2 float64 //ตัวแปร num1 และตัวแปร num2 ชนิด float64
-var operator string    //ตัวแปร operator ชนิด string
-var result float64     //ตัวแปร result ชนิด float64
+// การใช้ var ด้วยวงเล็บเปิด-ปิด () เพื่อจัดกลุ่มตัวแปรดูง่ายและชัดเจนขึ้น
+var (
+	num1, num2 float64 //ตัวแปร num1 และตัวแปร num2 ชนิด float64
+	operator   string  //ตัวแปร operator ชนิด string
+	result     float64 //ตัวแปร result ชนิด float64
+)
 
 func main() {
 	// ประกาศฟังก์ชัน Println() พิมพ์ข้อความที่เรากำหนด ออกจอภาพ
