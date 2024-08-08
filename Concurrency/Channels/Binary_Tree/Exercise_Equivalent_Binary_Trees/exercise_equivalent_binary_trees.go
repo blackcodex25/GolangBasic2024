@@ -15,6 +15,7 @@ type Tree struct {
 	Right *Tree
 }
 
+// ยังทำไม่เสร็จ
 func New(k int) *Tree
 func Walk(t *tree.Tree, ch chan int)
 
