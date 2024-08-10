@@ -10,29 +10,54 @@ import (
 Post-order traversal)
 4.พิมพ์ค่าของโหนดทั้งหมดที่ได้จากการเดินทางผ่านต้นไม้
 */
+/*
+	โครงสร้าง Tree เป็นโหนดใน Binary Tree ที่มีค่าประเภท int
+
+อยู่ในฟิลด์ Value
+ฟิลด์ Left และ Right เป็นพอยน์เตอร์ไปยังโหนดลูกซ้ายและขวา
+ตามลำดับ
+โครงสร้างนี้เป็นพื้นฐานของ Binary Tree ที่ใช้เก็บข้อมูลแบบเชิง
+ลำดับที่มีความสัมพันธ์ทางซ้าย-ขวา
+*/
 type Tree struct {
 	Value int
 	Left  *Tree
 	Right *Tree
 }
 
-// insert แทรกโหนดใหม่ที่มีค่าที่กำหนดลงในแผนผังไบนารี
+// *insert แทรกโหนดใหม่ที่มีค่าที่กำหนดลงในแผนผังไบนารี
+// ฟังก์ชัน Insert() ทำหน้าที่แทรกค่าใหม่ Value ลงใน Bianry Tree
 func (n *Tree) Insert(value int) {
+	// หาก value น้อยกว่าหรือเท่ากับ n.Value ตรวจสอบว่ามีโหนดลูกซ้าย (n.Left) อยู่หรือไม่
 	if value <= n.Value {
+		// ถ้าไม่มี โหนดลูกซ้ายฟิลด์ Left เท่ากับ nil
 		if n.Left == nil {
+			// จะสร้างโหนดลูกซ้ายใหม่ที่มีค่า value และเชื่อมโยงไปที่ n.Left
 			n.Left = &Tree{Value: value}
-		} else {
+		} else { // ถ้ามีโหนดลูกซ้ายแล้ว จะเรียก Insert() แบบเรียกซ้ำ (recursive) ในโหนดลูกซ้ายนั้น
 			n.Left.Insert(value)
 		}
-	} else {
+	} else { // ถ้า value มากกว่า n.Value
 		if n.Right == nil {
+			// ถ้าไม่มี โหนดลูกขวาฟิลด์ Right เท่ากับ nil
 			n.Right = &Tree{Value: value}
-		} else {
+		} else { // ถ้ามีโหนดลูกขวาแล้ว จะเรียก Insert() แบบเรียกซ้ำ (recursive) ในโหนดลูกขวานั้น
 			n.Right.Insert(value)
 		}
 	}
 }
 
+// *ฟังก์ชัน InOrder, PreOrder, และ PostOrder
+
+/*
+	InOrder Traversal:
+
+1.เยี่ยมชมต้นไม้ย่อยทางซ้าย (n.Left)
+2.พิมพ์ค่าในโหนดปัจจุบัน (n.Value)
+3.เยี่ยมชมต้นไม้ย่อยทางขวา (n.Right)
+จะพิมพ์ค่าทั้งหมดใน Binary Tree
+เรียงจากน้อยไปมากสำหรับ Binary Search Tree (BST)
+*/
 func (n *Tree) InOrder() {
 	if n == nil {
 		return
@@ -42,6 +67,15 @@ func (n *Tree) InOrder() {
 	n.Right.InOrder()
 }
 
+/*
+	PreOrder traversal:
+
+1.พิมพ์ค่าในโหนดปัจจุบัน (n.Value)
+2.เยี่ยมชมต้นไม้ย่อยซ้าย (n.Left)
+3.เยี่ยมชมต้นไม้ย่อยขวา (n.Right)
+จะพิมพ์ค่าทั้งหมดโดยเริ่มจากโหนด root ตามด้วยต้มไม้ย่อยซ้าย
+และขวาตามลำดับ
+*/
 func (n *Tree) PreOrder() {
 	if n == nil {
 		return
@@ -52,6 +86,14 @@ func (n *Tree) PreOrder() {
 
 }
 
+/*
+	PostOrder traversal:
+
+1.เยี่ยมชมต้นไม้ย่อยซ้าย (n.Left)
+2.เยี่ยมชมต้นไม้ย่อยขวา (n.Right)
+3.พิมพ์ค่าในโหนดปัจจุบัน (n.Value)
+จะพิมพ์ค่าทั้งหมดโดยเริ่มจาก
+*/
 func (n *Tree) PostOrder() {
 	if n == nil {
 		return
@@ -62,5 +104,35 @@ func (n *Tree) PostOrder() {
 }
 
 func main() {
+	// เริ่มต้นด้วยการสร้างต้นไม้ที่มี root เป็นโหนดที่มีค่า 10
+	root := &Tree{Value: 10}
+	/* จากนั้นจะเพิ่มค่าในชุด Values
+	ได้แก่ 5, 15, 3, 7, 13, 17 ลงในต้นไม้ */
+	values := []int{5, 15, 3, 7, 13, 17}
+	for _, value := range values {
+		root.Insert(value)
+	}
+	/* ฟังก์ชันเดินทางผ่านต้นไม้ (Inorder, PreOrder, PostOrder)
+	จะถูกเรียกและพิมพ์ค่าในต้นไม้ตามลำดับที่กำหนด
+	*/
+	f.Println("InOrder: ")
+	root.InOrder()
+	f.Println()
 
+	f.Println("PreOrder: ")
+	root.PreOrder()
+	f.Println()
+
+	f.Println("PostOrder: ")
+	root.PostOrder()
+	f.Println()
 }
+
+/* สรุป
+เราได้เรียนรู้วิธีการสร้างโครงสร้างข้อมูล Binary Tree ใน Go
+และการเพิ่มโหนดลงในต้นไม้
+เราได้เรียนรู้วิธีการเดินทางผ่านต้นไม้ในแบบต่างๆ และการพิมพ์
+ค่าของโหนด
+เราสามารถใช้ฟังก์ชันเหล่านี้ในการแก้ปัญหาเกี่ยวกับต้นไม้ในอนาคต
+ได้
+*/
